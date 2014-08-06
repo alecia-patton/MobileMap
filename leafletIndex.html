@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+		<![endif]-->
+		<style type="text/css">
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
+			html, body, #cupcake-map {
+				height: 100%;
+			}
+
+		</style>
+		<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/alecia-patton/LeafletTest/master/Control.OSMGeocoder.css"/>
+		
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	</head>
+	<body>
+		<div id="cupcake-map"></div>
+		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/LeafletTest/master/Control.OSMGeocoder.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/LeafletTest/master/leaflet.ajax.min.js"></script>
+		<script type="text/javascript">
+			var cupcakeTiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			});
+
+			var map = L.map('cupcake-map').setView([34.8703, -92.1153], 13);
+			
+			var geojsonLayer = new L.GeoJSON.AJAX("https://cdn.rawgit.com/alecia-patton/LeafletTest/master/cupcakes.json");
+			
+			
+			
+			
+			var boundary = new L.LatLngBounds([[34.9703, -92.0153], [34.7703, -92.2153]]);
+			var options = {
+				collapsed : false,
+				position : 'bottomright',
+				text : 'Address',
+				placeholder : 'Search...',
+				showResultIcons : true,
+				bounds : boundary,
+				email : null,
+				callback : function(results) {
+					var bbox = results[0].boundingbox, first = new L.LatLng(bbox[0], bbox[2]), second = new L.LatLng(bbox[1], bbox[3]), bounds = new L.LatLngBounds([first, second]);
+					this._map.fitBounds(bounds);
+				}
+			};
+
+			var osmGeocoder = new L.Control.OSMGeocoder(options);
+			map.addControl(osmGeocoder);
+			cupcakeTiles.addTo(map);
+			geojsonLayer.addTo(map);
+
+		</script>
+	</body>
+</html>
+
