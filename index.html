@@ -13,7 +13,7 @@
 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	
+
 		<!--Scripts and CSS -->
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 		<!--[if lte IE 8]>
@@ -31,9 +31,8 @@
 
 		</style>
 		<style>
-			.leaflet-top.leaflet-left{
-				margin-left:15px;
-				height=150px;
+			.leaflet-top.leaflet-left {
+				margin-left: 15px;height=150px;
 			}
 		</style>
 		<style>
@@ -54,7 +53,7 @@
 		</style>
 		<style>
 			.search-input {
-				
+
 				width: 130px;
 				height: 30px;
 			}
@@ -67,8 +66,7 @@
 
 		<!-- This section brings in the leaflet Javascript and CSS files -->
 		<link rel="stylesheet" href="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.css"/>
-		
-		<script>L_PREFER_CANVAS</script>
+
 		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 		<!--This section brings in the Leaflet-search Javascript which allows you to search the properties of GeoJSONs -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.js"></script>
@@ -80,7 +78,7 @@
 		<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
 		<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
-		
+
 		<link rel="stylesheet" href="https://cdn.rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/easyPrint.css"/>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="https://cdn.rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/jQuery.print.js"></script>
@@ -106,7 +104,7 @@
 			}
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpgravitypipe function to occur on each click.
-			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipe.geojson', {
+			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest.geojson', {
 				onEachFeature : popUpgravitypipe
 			});
 
@@ -119,26 +117,32 @@
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
 			var manholeMarkerOptions = {
-            radius : 6,
-            fillColor : "#BF000C",
-            color : "#BF000C",
-            weight : 1,
-            opacity : 100,
-            fillOpacity: 100
-        };
+				radius : 6,
+				fillColor : "#BF000C",
+				color : "#BF000C",
+				weight : 1,
+				opacity : 100,
+				fillOpacity : 100
+			};
 
-        //Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
-        var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholes.geojson', {
-            onEachFeature : popUpmanholes,
-            pointToLayer : function(feature, latlng) {
-                return L.circleMarker(latlng, manholeMarkerOptions);
-            }
-        });
+			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
+			var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholestest.geojson', {
+				onEachFeature : popUpmanholes,
+				pointToLayer : function(feature, latlng) {
+					return L.circleMarker(latlng, manholeMarkerOptions);
+				}
+			});
+
+			var pumpstations = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/pumpstationstest.geojson');
+			
+			var forcemains = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/forcemainstest.geojson');
 
 			//Actual Map
 			//Creates a map variable to be hosted in the division created earlier and sets the lat/long to center on Jacksonville at specified zoom level.
 			var map = L.map('mapDiv').setView([34.843676, -92.128687], 15);
 
+			pumpstations.addTo(map);
+			forcemains.addTo(map);
 			//Adds tiling service to map based on tiles variable.
 			tiles.addTo(map);
 
@@ -201,12 +205,13 @@
 			});
 			map.addControl(searchControl);
 			function onMapClick(e) {
-				
+
 			}
+
+
 			map.addLayer(manholes);
 			map.addLayer(gravitypipe);
-			
+
 		</script>
 	</body>
 </html>
-
