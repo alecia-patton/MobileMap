@@ -73,9 +73,9 @@
 		<!--This section brings in the Leaflet-search Javascript which allows you to search the properties of GeoJSONs -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.js"></script>
 		<!--This section brings in the OSMGeocoder Javascript and CSS files which allow you to search the Open Street Map addressing system -->
-		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/LeafletTest/master/Control.OSMGeocoder.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/MobileMap/master/Control.OSMGeocoder.js"></script>
 		<!--This section brings in the AJAX Javascript which allows GeoJSONs to be imported -->
-		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/LeafletTest/master/leaflet.ajax.min.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/MobileMap/master/leaflet.ajax.min.js"></script>
 		<!--This section brings in the ESRI Leaflet Javascript which allows you to use the ESRI web tiling service which gives us access to Pagis basemap  and ESRI Geocoding-->
 		<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
 		<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
@@ -106,7 +106,7 @@
 			}
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpgravitypipe function to occur on each click.
-			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/LeafletTest/master/gravitypipe.geojson', {
+			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipe.geojson', {
 				onEachFeature : popUpgravitypipe
 			});
 
@@ -128,7 +128,7 @@
         };
 
         //Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
-        var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/LeafletTest/master/manholes.geojson', {
+        var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholes.geojson', {
             onEachFeature : popUpmanholes,
             pointToLayer : function(feature, latlng) {
                 return L.circleMarker(latlng, manholeMarkerOptions);
