@@ -13,10 +13,9 @@
 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta name="viewport" content="user-scalable=0">
 
 		<!--Scripts and CSS -->
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 		<!--[if lte IE 8]>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
 		<![endif]-->
@@ -65,27 +64,14 @@
 			}
 		</style>
 
-		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-		<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
-
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-		<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
-		
-		<script src="https://cdn.rawgit.com/mapbox/leaflet-omnivore/master/leaflet-omnivore.min.js"></script>
-		
 		<!-- This section brings in the leaflet Javascript and CSS files -->
 		<link rel="stylesheet" href="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.css"/>
 
-		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 		<!--This section brings in the Leaflet-search Javascript which allows you to search the properties of GeoJSONs -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.js"></script>
 		<!--This section brings in the OSMGeocoder Javascript and CSS files which allow you to search the Open Street Map addressing system -->
-		<script type="text/javascript" src="https://cdn.rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/MobileMap/master/Control.OSMGeocoder.js"></script>
 		<!--This section brings in the AJAX Javascript which allows GeoJSONs to be imported -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/MobileMap/master/leaflet.ajax.min.js"></script>
 		<!--This section brings in the ESRI Leaflet Javascript which allows you to use the ESRI web tiling service which gives us access to Pagis basemap  and ESRI Geocoding-->
@@ -110,9 +96,31 @@
 			var tiles = L.esri.tiledMapLayer("http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer", {
 				maxZoom : 19
 			});
+			mapLink = '<a href="http://www.esri.com/">Esri</a>';
+			wholink = 'Sources: i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+			sources = 'Sources: USGS, FAO, NPS, EPA, DeLorme, Tele Atlas, ESRI'
+
+			var tiles = L.esri.tiledMapLayer("http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer", {
+				attribution : '&copy ' + mapLink + ' ' + sources,
+				maxZoom : 19
+			});
+
+			var imagery = L.esri.tiledMapLayer("http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer", {
+				attribution : '&copy; ' + mapLink + ' ' + wholink,
+				maxZoom : 19
+			});
 
 			//Gravity Pipe Popus and GeoJSON
 			//Creates a function that styles the popup window for the gravitypipe GeoJSON.
+
+			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpgravitypipe function to occur on each click.
+			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest.geojson', {
+				onEachFeature : popUpgravitypipe
+			});
+
+			//Manholes Popus and GeoJSONs
+
+			//Creates a function that styles the popup window for the manholes GeoJSON.
 			function popUppumpstation(feature, layer) {
 				layer.bindPopup("<font size=5><b>" + feature.properties.name + "</b></font><hr><b>Pipe ID: </b>" + feature.properties.pipe_id + "<br><b>Model: </b> " + feature.properties.model + "</br>" + "<br><b>Horsepower: </b> " + feature.properties.hp + "<br><b>Amps to Start: </b> " + feature.properties.amp_start + "<br><b>Amps to Run: </b> " + feature.properties.amp_run + "<br><b>Gallons: </b> " + feature.properties.gpm + "</br>" + "<br><b>Well Depth: </b> " + feature.properties.well_depth + "</br></br><a target='_blank' href='https://drive.google.com/file/d/0B02WKnUFD5LVWDBhczZtUkoxRWs/edit?usp=sharing'>Operator's Manual</a>");
 			}
@@ -133,6 +141,7 @@
 			function popUpmanholes(feature, layer) {
 				layer.bindPopup("<b><font size=5>" + feature.properties.mh_num + "</font><hr></b><br><b>Old ID: </b>" + feature.properties.old_id + "<br><b>Old ID: </b>" + feature.properties.old_id_2 + "</br>" + "<br><b>Type: </b> " + feature.properties.type + "<br><b>Depth: </b> " + feature.properties.depth + "<br><b>Drop Present: </b> " + feature.properties.drop + "</br>" + "<br><b>Inspection Date: </b> " + feature.properties.inspection + "<br>" + '<a href="' + feature.properties.drive + '">Televising Report</a>' + "</br>" + "<br><b>Owner: </b> " + feature.properties.owner);
 			}
+
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
 			var manholeMarkerOptions = {
@@ -163,71 +172,68 @@
 				opacity : 100,
 				fillOpacity : 100
 			};
-			
+
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
-			var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholestest2.geojson', {
+			var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholestest.geojson', {
 				onEachFeature : popUpmanholes,
 				pointToLayer : function(feature, latlng) {
 					return L.circleMarker(latlng, manholeMarkerOptions);
 				}
 			});
 
-			var pumpstations = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/pumpstationstest2.geojson', {
+			var pumpstations = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/pumpstationstest.geojson', {
 				onEachFeature : popUppumpstation,
 				pointToLayer : function(feature, latlng) {
 					return L.circleMarker(latlng, pumpstationMarkerOptions);
 				}
 			});
 
-			var forcemains = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/forcemainstest2.geojson', {
+			var forcemains = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/forcemainstest.geojson', {
 				onEachFeature : popUpforcemains,
 				style : forcemainsLineOptions,
-				pointToLayer : function(feature, latlng) {
-					return L.polyline(latlng, forcemainsLineOptions);
+				pointToLayer : function(feature, latlng) { style :forcemainsLineOptions
 				}
 			});
 
-			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest2.geojson', {
+			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest.geojson', {
 				onEachFeature : popUpgravitypipe,
 				style : gravitypipeOptions
 			});
-			
-			
-			
 
 			//Actual Map
 			//Creates a map variable to be hosted in the division created earlier and sets the lat/long to center on Jacksonville at specified zoom level.
-			var map = L.map('mapDiv').setView([34.843676, -92.128687], 18);
-
-			//pumpstations.addTo(map);
-			//forcemains.addTo(map);
+			var map = L.map('mapDiv').setView([34.843676, -92.128687], 15);
+			gravitypipe.addTo(map);
+			pumpstations.addTo(map);
+			forcemains.addTo(map);
 			//Adds tiling service to map based on tiles variable.
 			tiles.addTo(map);
-var gravpipe = omnivore.topojson('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest2.json')
-    .addTo(map);
+
 			//Legend
 			//Creates variable to be used when adding legend to map.  Creates two layers based on GeoJSONs.
 
 			//ESRI Geocoding
-			/*var geocoderOption = {
-			 expanded : false,
-			 useMapBounds : true
 
-			 };
+			//Creates legend variables.
 
-			 var searchControl = new L.esri.Controls.Geosearch(geocoderOption).addTo(map);
+			var basemaps = {
+				"Street View" : tiles,
+				"Aerial View" : imagery
+			};
 
-			 var results = new L.LayerGroup().addTo(map);
+			var overlays = {
+				"Manholes" : manholes,
+				"Pipes" : gravitypipe,
+				"Pumps" : pumpstations,
+				"Forcemains" : forcemains
+			};
 
-			 searchControl.on('results', function(data) {
-			 results.clearLayers();
-			 for (var i = data.results.length - 1; i >= 0; i--) {
-			 results.addLayer(L.marker(data.results[i].latlng));
-			 }
-			 });*/
+			var legendOptions = {
+				collapsed : true
+			};
 
-			/*var mark;
-			var marker;
+			//Adds legend control to map using overlays variable.  First one is a radio button.
+			L.control.layers(basemaps, overlays, legendOptions).addTo(map);
 			var boundary = new L.LatLngBounds([[34.9703, -92.0153], [34.7703, -92.2153]]);
 			var options = {
 				collapsed : true,
@@ -246,42 +252,17 @@ var gravpipe = omnivore.topojson('https://cdn.rawgit.com/alecia-patton/MobileMap
 
 			map.addControl(new L.Control.OSMGeocoder(options));
 
-			gravitypipe.addTo(map);
-
-			//Creates legend variables.
-
-			var overlays = {
-				"Manholes" : manholes,
-				"Pipes" : gravitypipe,
-				"Pumps" : pumpstations,
-				"Forcemains" : forcemains
-			};
-
-			var legendOptions = {
-				collapsed : true
-			};
-
-			//Adds legend control to map using overlays variable.  First one is a radio button.
-			L.control.layers("", overlays, legendOptions).addTo(map);
-
 			//Searches Manhole GeoJSON based on manhole ID.
-			
-
-			L_DISABLE_3D = true;
-
-			map.addLayer(manholes);
-			map.addLayer(gravitypipe);
-
-			var mhNumSearch = new L.Control.Search({
+			var searchControl = new L.Control.Search({
 				layer : manholes,
 				propertyName : 'mh_num',
 				circleLocation : false,
 				position : 'topleft',
 				zoom : 19,
-				collapsed : true
+				collapsed : false
 
 			});
-			mhNumSearch.on('search_locationfound', function(e) {
+			searchControl.on('search_locationfound', function(e) {
 
 				//map.setView(e.properties.coordinates, 1);
 
@@ -296,10 +277,14 @@ var gravpipe = omnivore.topojson('https://cdn.rawgit.com/alecia-patton/MobileMap
 					manholes.resetStyle(layer);
 				});
 			});
-			
-			map.addControl(mhNumSearch);
-			*/
-			
+			map.addControl(searchControl);
+			function onMapClick(e) {
+
+			}
+
+
+			map.addLayer(manholes);
+			map.addLayer(gravitypipe);
 
 		</script>
 	</body>
