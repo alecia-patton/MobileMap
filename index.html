@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<!--Scripts and CSS -->
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<!--[if lte IE 8]>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
 		<![endif]-->
@@ -25,7 +25,7 @@
 				margin: 0;
 			}
 
-			html, body, #mapDiv {
+			html, body, #map {
 				height: 100%;
 			}
 
@@ -74,14 +74,14 @@
 		<style>
 			.leaflet-control-search .search-cancel {
 				position: relative;
-				left:161px;
+				left: 161px;
 			}
 		</style>
 
 		<!-- This section brings in the leaflet Javascript and CSS files -->
 		<link rel="stylesheet" href="https://cdn.rawgit.com/alecia-patton/leaflet-search/d14b298acf066c767306cd8b841a32b5dffa263c/dist/leaflet-search.src.css"/>
 
-		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 		<!--This section brings in the Leaflet-search Javascript which allows you to search the properties of GeoJSONs -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/leaflet-search/master/dist/leaflet-search.src.js"></script>
 		<!--This section brings in the OSMGeocoder Javascript and CSS files which allow you to search the Open Street Map addressing system -->
@@ -93,16 +93,16 @@
 		<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
-		<link rel="stylesheet" href="https://cdn.rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/easyPrint.css"/>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/alecia-patton/leaflet-easyPrint/gh-pages/dist/easyPrint.css"/>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="https://cdn.rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/jQuery.print.js"></script>
-		<script src="https://cdn.rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/leaflet.easyPrint.js"></script>
+		<script src="https://cdn.rawgit.com/alecia-patton/leaflet-easyPrint/gh-pages/dist/jQuery.print.js"></script>
+		<script src="https://cdn.rawgit.com/alecia-patton/leaflet-easyPrint/af916871de22474e7e0af6bca36b1825d70d5131/dist/leaflet.easyPrint.js"></script>
 
 	</head>
 
 	<body>
 		<!-- This creates a division to host the map -->
-		<div id="mapDiv"></div>
+		<div id="map"></div>
 		</div>
 		<!--Beginning of Leaflet Javascript -->
 		<script>
@@ -128,10 +128,6 @@
 			//Creates a function that styles the popup window for the gravitypipe GeoJSON.
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpgravitypipe function to occur on each click.
-			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest.geojson', {
-				onEachFeature : popUpgravitypipe
-			});
-
 			//Manholes Popus and GeoJSONs
 
 			//Creates a function that styles the popup window for the manholes GeoJSON.
@@ -187,19 +183,6 @@
 			};
 
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
-			var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholestest.geojson', {
-				onEachFeature : popUpmanholes,
-				pointToLayer : function(feature, latlng) {
-					return L.circleMarker(latlng, manholeMarkerOptions);
-				}
-			});
-
-			var pumpstations = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/pumpstationstest.geojson', {
-				onEachFeature : popUppumpstation,
-				pointToLayer : function(feature, latlng) {
-					return L.circleMarker(latlng, pumpstationMarkerOptions);
-				}
-			});
 
 			var forcemains = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/forcemainstest.geojson', {
 				onEachFeature : popUpforcemains,
@@ -207,17 +190,30 @@
 				pointToLayer : function(feature, latlng) { style :forcemainsLineOptions
 				}
 			});
-
+			
+			var pumpstations = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/pumpstationstest.geojson', {
+				onEachFeature : popUppumpstation,
+				pointToLayer : function(feature, latlng) {
+					return L.circleMarker(latlng, pumpstationMarkerOptions);
+				}
+			});
+			
 			var gravitypipe = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/gravitypipetest.geojson', {
 				onEachFeature : popUpgravitypipe,
 				style : gravitypipeOptions
 			});
 
+			var manholes = new L.GeoJSON.AJAX('https://cdn.rawgit.com/alecia-patton/MobileMap/master/manholestest.geojson', {
+				onEachFeature : popUpmanholes,
+				pointToLayer : function(feature, latlng) {
+					return L.circleMarker(latlng, manholeMarkerOptions);
+				}
+			});
+
 			//Actual Map
 			//Creates a map variable to be hosted in the division created earlier and sets the lat/long to center on Jacksonville at specified zoom level.
-			var map = L.map('mapDiv').setView([34.843676, -92.128687], 18);
-			pumpstations.addTo(map);
-			forcemains.addTo(map);
+			var map = L.map('map').setView([34.843676, -92.128687], 18);
+
 			//Adds tiling service to map based on tiles variable.
 			tiles.addTo(map);
 
@@ -234,14 +230,16 @@
 			};
 
 			var overlays = {
-				"Manholes" : manholes,
+
 				"Pipes" : gravitypipe,
 				"Pumps" : pumpstations,
-				"Forcemains" : forcemains
+				"Forcemains" : forcemains,
+				"Manholes" : manholes
 			};
 
 			var legendOptions = {
-				collapsed : true
+				collapsed : true,
+				autoZindex : true
 			};
 
 			//Adds legend control to map using overlays variable.  First one is a radio button.
@@ -290,13 +288,11 @@
 				});
 			});
 			map.addControl(searchControl);
-			function onMapClick(e) {
 
-			}
+			L.easyPrint().addTo(map);
 
-
-			map.addLayer(manholes);
 			map.addLayer(gravitypipe);
+			map.addLayer(manholes);
 
 		</script>
 	</body>
