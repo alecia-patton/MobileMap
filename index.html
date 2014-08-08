@@ -48,7 +48,14 @@
 		</style>
 		<style>
 			.leaflet-control-search.search-exp {
-				width: 200px;
+				width: 231px;
+				opacity: 100;
+			}
+		</style>
+		<style>
+			.leaflet-control-search .search-button {
+				margin-left: 6px;
+				margin-right: 0px;
 			}
 		</style>
 		<style>
@@ -56,6 +63,7 @@
 
 				width: 130px;
 				height: 30px;
+				background-color: #ff0000;
 			}
 		</style>
 		<style>
@@ -63,13 +71,19 @@
 				margin-right: 15px;
 			}
 		</style>
+		<style>
+			.leaflet-control-search .search-cancel {
+				position: relative;
+				left:161px;
+			}
+		</style>
 
 		<!-- This section brings in the leaflet Javascript and CSS files -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.css"/>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/alecia-patton/leaflet-search/d14b298acf066c767306cd8b841a32b5dffa263c/dist/leaflet-search.src.css"/>
 
 		<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 		<!--This section brings in the Leaflet-search Javascript which allows you to search the properties of GeoJSONs -->
-		<script type="text/javascript" src="https://cdn.rawgit.com/stefanocudini/leaflet-search/master/dist/leaflet-search.src.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/leaflet-search/master/dist/leaflet-search.src.js"></script>
 		<!--This section brings in the OSMGeocoder Javascript and CSS files which allow you to search the Open Street Map addressing system -->
 		<script type="text/javascript" src="https://cdn.rawgit.com/alecia-patton/MobileMap/master/Control.OSMGeocoder.js"></script>
 		<!--This section brings in the AJAX Javascript which allows GeoJSONs to be imported -->
@@ -142,7 +156,6 @@
 				layer.bindPopup("<b><font size=5>" + feature.properties.mh_num + "</font><hr></b><br><b>Old ID: </b>" + feature.properties.old_id + "<br><b>Old ID: </b>" + feature.properties.old_id_2 + "</br>" + "<br><b>Type: </b> " + feature.properties.type + "<br><b>Depth: </b> " + feature.properties.depth + "<br><b>Drop Present: </b> " + feature.properties.drop + "</br>" + "<br><b>Inspection Date: </b> " + feature.properties.inspection + "<br>" + '<a href="' + feature.properties.drive + '">Televising Report</a>' + "</br>" + "<br><b>Owner: </b> " + feature.properties.owner);
 			}
 
-
 			//Creates a variable to grab GeoJSON from GitHub repository and calls the popUpmanholes function to occur on each click.
 			var manholeMarkerOptions = {
 				radius : 8,
@@ -202,8 +215,7 @@
 
 			//Actual Map
 			//Creates a map variable to be hosted in the division created earlier and sets the lat/long to center on Jacksonville at specified zoom level.
-			var map = L.map('mapDiv').setView([34.843676, -92.128687], 15);
-			gravitypipe.addTo(map);
+			var map = L.map('mapDiv').setView([34.843676, -92.128687], 18);
 			pumpstations.addTo(map);
 			forcemains.addTo(map);
 			//Adds tiling service to map based on tiles variable.
