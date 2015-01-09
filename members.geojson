@@ -2,6 +2,6 @@
 "type": "FeatureCollection",
                                                                                 
 "features": [
-{ "type": "Feature", "properties": { "id": 1, "Member": "Jacksonville Wastewater Utility", "Contact": "Alecia Patton, G.I.S. Coordinator", "Phone": "(501) 982-0581", "Address": "248 Cloverdale Road", "City": "Jacksonville" }, "geometry": { "type": "Point", "coordinates": [ -92.127179189507757, 34.844864031301178 ] } }
+{ "type": "Feature", "properties": { "Member": "Jacksonville Wastewater Utility" }, "geometry": { "type": "Point", "coordinates": [ -92.127179189507757, 34.844864031301178 ] } }
 ]
 }
