@@ -2,6 +2,29 @@
 "type": "FeatureCollection",
                                                                                 
 "features": [
-{ "type": "Feature", "properties": { "Member": "Jacksonville Wastewater Utility" }, "geometry": { "type": "Point", "coordinates": [ -92.127179189507757, 34.844864031301178 ] } }
+{ "type": "Feature", "properties": { "Member": "Jacksonville Wastewater Utility" }, "geometry": { "type": "Point", "coordinates": [ -92.127179189507757, 34.844864031301178 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Arkadelphia" }, "geometry": { "type": "Point", "coordinates": [ -93.055117, 34.118985 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Ashdown" }, "geometry": { "type": "Point", "coordinates": [ -94.131242, 33.673525 ] } },
+{ "type": "Feature", "properties": { "Member": "Beaver Water District" }, "geometry": { "type": "Point", "coordinates": [ -94.105654, 36.257326 ] } },
+{ "type": "Feature", "properties": { "Member": "Grand Prairie Regional Water Distribution District" }, "geometry": { "type": "Point", "coordinates": [ -91.541897, 34.457029 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Watson" }, "geometry": { "type": "Point", "coordinates": [ -91.259353, 33.891861 ] } },
+{ "type": "Feature", "properties": { "Member": "Trumann Rural Water" }, "geometry": { "type": "Point", "coordinates": [ -90.526817, 35.682838 ] } },
+{ "type": "Feature", "properties": { "Member": "Little Rock Wastewater" }, "geometry": { "type": "Point", "coordinates": [ -92.391441, 34.705842 ] } },
+{ "type": "Feature", "properties": { "Member": "Sardis Water" }, "geometry": { "type": "Point", "coordinates": [ -92.407836, 34.533799 ] } },
+{ "type": "Feature", "properties": { "Member": "Central Arkansas Water" }, "geometry": { "type": "Point", "coordinates": [ -92.269098, 34.743942 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Heber Springs" }, "geometry": { "type": "Point", "coordinates": [ -92.040611, 35.499584 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Bryant" }, "geometry": { "type": "Point", "coordinates": [ -92.501269, 34.594162 ] } },
+{ "type": "Feature", "properties": { "Member": "North Little Rock Wastewater" }, "geometry": { "type": "Point", "coordinates": [ -92.177599, 34.738328 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Camden" }, "geometry": { "type": "Point", "coordinates": [ -92.828969, 33.587554 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Ozark" }, "geometry": { "type": "Point", "coordinates": [ -93.859127, 35.490509 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Magnolia" }, "geometry": { "type": "Point", "coordinates": [ -93.239162, 33.269339 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Searcy" }, "geometry": { "type": "Point", "coordinates": [ -91.740642, 35.250347 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Damascus" }, "geometry": { "type": "Point", "coordinates": [ -92.412124, 35.359903 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Greenbrier" }, "geometry": { "type": "Point", "coordinates": [ -92.387048, 35.222838 ] } },
+{ "type": "Feature", "properties": { "Member": "West Saline Water Users" }, "geometry": { "type": "Point", "coordinates": [ -92.241106, 33.759413 ] } },
+{ "type": "Feature", "properties": { "Member": "City of Cotton Plant" }, "geometry": { "type": "Point", "coordinates": [ -91.254871, 35.004933 ] } },
+{ "type": "Feature", "properties": { "Member": "Salem Water Users and Southwest Water Users" }, "geometry": { "type": "Point", "coordinates": [ -92.605367, 34.559044 ] } },
+{ "type": "Feature", "properties": { "Member": "Nashville Rural Water" }, "geometry": { "type": "Point", "coordinates": [ -93.83207, 33.964117 ] } },
+{ "type": "Feature", "properties": { "Member": "Benton Washington Water" }, "geometry": { "type": "Point", "coordinates": [ -94.052739, 36.401448 ] } }
 ]
 }
